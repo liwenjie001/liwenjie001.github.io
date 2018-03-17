@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[Centos7卸载自带jdk]]></title>
+    <url>%2Fposts%2Fc459be10%2F</url>
+    <content type="text"><![CDATA[一.背景 一般来讲Centos7会自带一个openJdk 显然这不是sun公司的，所有我们在干活之前，要把这个卸载掉，安装上sun的jdk;二.卸载 查看是否安装了openJdk1$ rpm -qa | grep java 结果为： 把箭头指向的内容卸载掉 注意：箭头没有指向的不要删除···$ rpm -e –nodeps 你所要卸载的jdk···输入命令查一下，如图所示代表，卸载完成三.安装sun公司的jdk 下载 官官网下载jdk1.8rpm安装包 下载完之后 用xshell工具rz -e 命令上传到服务器 如果没有这个命令用 yum -y install lrzsz 安装 解压安装 1$ rpm -ivh jdk-8u161-linux-x64.rpm //后面输入的是你下载的jdk版本 输入java-version 结果如图 就带表安装成功了 注意：jdk默认安装在/usr/java 下 四.尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux笔记 jdk</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hadoop学习Linux访问宿主机防火墙问题]]></title>
+    <url>%2Fposts%2F31cddb20%2F</url>
+    <content type="text"><![CDATA[一.背景： 在学习大数据的时候，往往需要宿主机和虚拟机之间互相访问，所以我们需要把linux和windows的防火墙都关闭； 而关闭windows的防火墙就有一个安全隐患，而且每次开启关闭的很烦人，所以就有了今天的解决办法；二.解决方案 利用windows防火墙里面的高级工具（废话不多说，上图）点击类别，选择小图标选择防火墙点击高级设置点击入站规则,右键新建规则点击程序,然后点击下一步然后点击所有程序，也可以选定特定的程序（但是我没有找到Vmware具体的是那个程序）允许链接默认三个就行最后起好名称，描述一下，完成就行了；2.最后测试一下，打开防火墙，ping一下，通了，就成功了； 三.最后说一下 如果有什么地方不对，欢迎在下面评论写出。 最后希望自己从今天这篇文章开始一天一个博客，提升自己的能力，加油。]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>hadoop linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[工厂模式]]></title>
+    <url>%2Fposts%2F54788f73%2F</url>
+    <content type="text"><![CDATA[一、背景在面向对象编程的时候，经常遇到的是new一下，然后产生一个对象，但是在一些情况下new一个对象会产生很多问题。例如：许多类型的创造需要一些列的步骤：你可能需要计算或者取得对象的初始设置、选择生成那个子对象实例、或在你生成子对象之前必须先生成一些列的辅助功能对象；在这种情况下新对象的创建就是一个过程，就不是一个操作，像一个机器当中的齿轮传动，需要各个齿轮的配合； 问题：怎样很容易的创建对象呢？？？解决方案：利用工厂模式创建对象；二、分类工厂模式主要是为创建对象提供过渡接口，以便将创建的具体过程屏蔽起来，达到提高灵活性的目的； 分类： 简单工厂模式 普通简单工厂 多方法简单工厂 静态方法简单工厂 工厂方法模式（Factory Method） 单例模式（Singleton） 三、简单工厂模式普通简单工厂模式就是建一个普通的工厂类,对实现同一接口的一些类进行创建 如图： 举例如下：（我们打算用一个发送邮件和发送短信的例子）首先创建二者的共同接口： 123public interface Sender &#123;//此接口主要是实现发送功能 public void send();//次方法是实现发送的；&#125; 其次是创建实现类： 123456public class MailSender implements Sender &#123; @Override public void send() &#123; System.out.println(&quot;这是一个发送邮件的&quot;); &#125;&#125; 12345678public class SmsSender implements Sender &#123; @Override public void send() &#123; System.out.println(&quot;这是发送短息的&quot;); &#125;&#125; 最后创建工厂类： 123456789101112131415public class SendFactory &#123; public Sender produce(String type)&#123;//这个参数代表这对象的类型 if (&quot;mail&quot;.equals(type)) &#123; //这个是如果传入的类型是邮件的话 就返回一个邮件的对象； return new MailSender(); &#125; else if (&quot;sms&quot;.equals(type))&#123; //这个是发短信 return new SmsSender(); &#125; else&#123; System.out.println(&quot;请输入正确的类型&quot;); return null; &#125; &#125;&#125; 测试代码： 12345public static void main(String[] args) &#123; SendFactory factory = new SendFactory(); Sender sms = factory.produce(&quot;sms&quot;); sms.send(); &#125; 结果如下：可以说明创建一个工厂类，通过传递参数就可以解决创建一个对象的；很方便；]]></content>
+      <categories>
+        <category>java设计模式</category>
+      </categories>
+      <tags>
+        <tag>学习 Java Java设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HTML5桌面通知：Notification-API]]></title>
+    <url>%2Fposts%2F7a8c60b0%2F</url>
+    <content type="text"><![CDATA[初识 之前用chrom浏览器看视频的时候，总会收到这样桌面通知（如下图）就思考这是怎么实现的，直到头几天在掘金上发现有人写的Notification-API的教程； 什么是H5 Notification ？？？ Notification是H5特别好的一个新特性，Notification可以实现类似桌面软件一样把通知显示在电脑的又下角，这样就算你在全屏看视频的时候也可以看到这个消息的通知，比如你正在看战狼2，看的正激烈，你的公司给你发了一个项目的bug的邮件，需要及时解决，如果你的邮件用了Notification就不至于错过了；所以这也是现在Notification这么流行的原因。 实现 最核心的就是window下面的Notification() Notification()的第一个参数是消息的头部 第二个参数是具体的信息，其中body代表网站的介绍。icon代表网站的logo1234var notification = new Notification(&quot;欢迎来自it科技论坛&quot;, &#123;body:&apos;谢谢你，如果喜欢此网站的话请多多访问。&apos;, icon:&apos;https://cdn2.iconfinder.com/data/icons/ios-7-style-metro-ui-icons/512/MetroUI_HTML5.png&apos;, dir:&apos;auto&apos;&#125;); Notification.requestPermission() 这个方法执行时浏览器会发送请求，请求浏览器允许不允许显示； 123456789101112Notification.requestPermission(function(status) &#123; //status是授权状态，如果用户允许显示桌面通知，则status为&apos;granted&apos; console.log(&apos;status: &apos; + status); //permission只读属性 var permission = Notification.permission; //default 用户没有接收或拒绝授权请求 不能显示通知 //granted 用户接受授权请求 允许显示通知 //denied 用户拒绝授权请求 不允许显示通知 console.log(&apos;permission: &apos; + permission);&#125;); 其实到这里你就可以用Notification了； 扩展 onshow的方法是当消息展示出来的触发一些操作，比如给我们的服务器端发送信息，或者给我们的设置一个时间使我们的消息自动关闭； 123456789//onshow函数在消息框显示时会被调用 //可以做一些数据记录及定时操作等 notification.onshow = function() &#123; console.log(&apos;notification shows up&apos;); //5秒后关闭消息框 setTimeout(function() &#123; notification.close(); &#125;, 10000); &#125;; 设置消息点击事件监听；我们可以自定义做很多事情； 123456//消息框被点击时被调用 //可以打开相关的视图，同时关闭该消息框等操作 notification.onclick = function() &#123; alert(&apos;非常感谢访问我们，请点击确认访问我们吧&apos;); notification.close(); &#125;; 当发生错误的时候会触发此方法，或者浏览器拒绝我们显示小心的时候，也会触发 123456//当有错误发生时会onerror函数会被调用//如果没有granted授权，创建Notification对象实例时，也会执行onerror函数notification.onerror = function() &#123; console.log(&apos;Notification发生错误可能没有授权&apos;); //do something useful&#125; 当关闭消息的时候会执行，也可以 做一下后台的统计计算； 123456//一个消息框关闭时onclose函数会被调用 notification.onclose = function() &#123; console.log(&apos;notification 被关闭了&apos;); //do something useful &#125;;&#125;); 总结以上就是我学习关于Notification的见解，如果有错误请在下面评论我会及时改正；]]></content>
+      <categories>
+        <category>前端-H5</category>
+      </categories>
+      <tags>
+        <tag>H5 学习笔记</tag>
+      </tags>
+  </entry>
+</search>
