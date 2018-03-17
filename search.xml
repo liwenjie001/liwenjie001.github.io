@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CentOs7安装hadoop3.0(一)]]></title>
+    <url>%2Fposts%2Fe41077e7%2F</url>
+    <content type="text"><![CDATA[一、准别工作需要安装java环境，如果需要请看我Centos7安装jdk 二、下载去阿帕奇官网下载hadoop（这里以hadoop3.0为主，如果需要其他版本自己去官网下载）下载hadoop3.0 三、上传到CentOs7然后解压安装12$ rz -e //上传文件$ tar -xzvf hadoop-3.0.0.tar.gz //解压 结果为：1$ cp -rf hadoop-3.0.0 /usr/hadoop //复制到usr/hadoop目录或者自己新建的目录也可以； 然后进入hadoop的bin目录1$ cd /usr/hadoop/bin 输入命令验证版本号1$ ./hadoop version 如果截图为：说明你安装成功了，如果不是这样那么请reboot重启一下系统就好了。 四、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+      <categories>
+        <category>hadoop</category>
+      </categories>
+      <tags>
+        <tag>linux hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Centos7卸载自带jdk]]></title>
     <url>%2Fposts%2Fc459be10%2F</url>
     <content type="text"><![CDATA[一.背景 一般来讲Centos7会自带一个openJdk 显然这不是sun公司的，所有我们在干活之前，要把这个卸载掉，安装上sun的jdk;二.卸载 查看是否安装了openJdk1$ rpm -qa | grep java 结果为： 把箭头指向的内容卸载掉 注意：箭头没有指向的不要删除···$ rpm -e –nodeps 你所要卸载的jdk···输入命令查一下，如图所示代表，卸载完成三.安装sun公司的jdk 下载 官官网下载jdk1.8rpm安装包 下载完之后 用xshell工具rz -e 命令上传到服务器 如果没有这个命令用 yum -y install lrzsz 安装 解压安装 1$ rpm -ivh jdk-8u161-linux-x64.rpm //后面输入的是你下载的jdk版本 输入java-version 结果如图 就带表安装成功了 注意：jdk默认安装在/usr/java 下 四.尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。]]></content>
