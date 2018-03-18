@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[linux常用命令]]></title>
+    <url>%2Fposts%2Ffe4ef317%2F</url>
+    <content type="text"><![CDATA[一、vi编辑器 查看行号1$ :set number .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[CentOs7安装hadoop3（二）]]></title>
+    <url>%2Fposts%2Fb24ffb1%2F</url>
+    <content type="text"><![CDATA[一、准备工作 配置hadoop环境变量12345$ vi /etc/profile export HADOOP_HOME=/usr/hadoop export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:wq$ source /etc/profile 然后通过Hadoop version查看结果 二、搭建伪分布式 进入配置文件目录12$ cd /usr/hadoop/etc/hadoop/$ ls 配置core-site.xml 文件 vi core-site.xml 12345// 在&lt;configuration&gt; 标签里面加上以下代码&lt;property&gt; &lt;name&gt;fs.defaultFS&lt;/name&gt; &lt;value&gt;hdfs://localhost/&lt;/value&gt; //默认端口为：8020；&lt;/property&gt; 配置hdfs-site.xml 文件 vi hdfs-site.xml 12345// 在&lt;configuration&gt; 标签里面加上以下代码&lt;property&gt; &lt;name&gt;dfs.replication&lt;/name&gt; //副本数 &lt;value&gt;1&lt;/value&gt; //伪分布式一额节点&lt;/property&gt; 配置 mapred-site.xml 文件 vi mapred-site.xml 12345// 在&lt;configuration&gt; 标签里面加上以下代码&lt;property&gt; &lt;name&gt;mapreduce.framework.name&lt;/name&gt; &lt;value&gt;yarn&lt;/value&gt;&lt;/property&gt; 配置 yarn-site.xml 文件 viyarn-site.xml 12345678&lt;property&gt; &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt; &lt;value&gt;localhost&lt;/value&gt;&lt;/property&gt;&lt;property&gt; &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt; &lt;value&gt;mapreduce_shuffle&lt;/value&gt;&lt;/property&gt; 初始化化hdfs ：hadoop namenode -format（这就像从新安装系统一样） 7.启动 start-all.sh 注意：这是甚吗？？？？这是由于缺少用户定义所以我们要分别对启动和关闭脚本进行配置 配置 start-dfs.sh 和 stop-dfs.sh 123456//把以下代码复制到文件的空白处 ：wq 保存退出HDFS_DATANODE_USER=rootHDFS_DATANODE_SECURE_USER=hdfsHDFS_NAMENODE_USER=rootHDFS_SECONDARYNAMENODE_USER=root 配置 start-yarn.sh 和 stop-yarn.sh 1234//把以下代码复制到文件的空白处 ：wq 保存退出YARN_RESOURCEMANAGER_USER=rootHADOOP_SECURE_DN_USER=yarnYARN_NODEMANAGER_USER=root 这次在运行 start-all.sh 使用jps查看进程 红框内的5个进程缺一不可，如果没有有一个没有启动，必须关闭所有所有经常，从新启动；三、SSH安装与使用 为甚吗要安装SSH？众所周知，hadoop是集群部署的，假如你有个上千台服务器，当hadoop互相访问的时候，你一个一个互相输入登陆密码，你是不是会疯。所有SSH就能让你互相免密登陆，解决手动输入密码的问题。 SSH怎么解决的免密登陆问题？3.怎么设置呢？1$ rpm -qa | grep ssh //查询是否安装 如图就是安装了SSH 如果没有请通过下面代码安装 1$ yum install openssh 生成密钥 1$ ssh-keygen -t rsa 进入ssh密钥目录，把公钥复制一份发往目标主机 123$ cd ~/.ssh$ ls$ cp id_rsa.pub ~./ssh/authorized_keys //以自身主机为例 登陆一下 1$ ssh localhost 如图结果,代表成功。 四、尾巴 如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。 这次搭建遇到了很多问题，如果想最快的解决问题，还是要看它报甚吗错，一个一个错误的排查，这样更能让你快速的解决问题，也能让自己更加进步。如果是在看不懂问题的所在出，请baidu一下，会有网友遇到你也曾经遇到的坑的； 也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[CentOs7安装hadoop3.0(一)]]></title>
     <url>%2Fposts%2Fe41077e7%2F</url>
     <content type="text"><![CDATA[一、准别工作需要安装java环境，如果需要请看我Centos7安装jdk 二、下载去阿帕奇官网下载hadoop（这里以hadoop3.0为主，如果需要其他版本自己去官网下载）下载hadoop3.0 三、上传到CentOs7然后解压安装12$ rz -e //上传文件$ tar -xzvf hadoop-3.0.0.tar.gz //解压 结果为：1$ cp -rf hadoop-3.0.0 /usr/hadoop //复制到usr/hadoop目录或者自己新建的目录也可以； 然后进入hadoop的bin目录1$ cd /usr/hadoop/bin 输入命令验证版本号1$ ./hadoop version 如果截图为：说明你安装成功了，如果不是这样那么请reboot重启一下系统就好了。 四、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
