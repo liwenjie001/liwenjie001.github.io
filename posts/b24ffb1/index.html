@@ -126,7 +126,7 @@
 <meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803182153_947.png">
 <meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803182203_737.png">
 <meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803182215_564.png">
-<meta property="og:updated_time" content="2018-03-18T14:16:41.265Z">
+<meta property="og:updated_time" content="2018-03-21T13:24:34.856Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOs7安装hadoop3（二）">
 <meta name="twitter:description" content="SSH详解和伪分布式的搭建">
@@ -482,7 +482,7 @@
 <li><p>配置 mapred-site.xml 文件  vi mapred-site.xml</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在&lt;configuration&gt; 标签里面加上以下代码</span><br><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>配置 yarn-site.xml 文件 viyarn-site.xml</p>
+<li><p>配置 yarn-site.xml 文件 vi yarn-site.xml</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;localhost&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>初始化化hdfs ：hadoop namenode -format（这就像从新安装系统一样）</p>
@@ -699,7 +699,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

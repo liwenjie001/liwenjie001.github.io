@@ -119,7 +119,7 @@
 <meta property="og:site_name" content="liwenjie001的博客">
 <meta property="og:description" content="个人遇到的linux常用命令总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-18T07:37:12.463Z">
+<meta property="og:updated_time" content="2018-03-20T14:43:43.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux常用命令">
 <meta name="twitter:description" content="个人遇到的linux常用命令总结">
@@ -458,6 +458,17 @@
 <li>查看行号<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ :set number</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<h2 id="二、解压和压缩"><a href="#二、解压和压缩" class="headerlink" title="二、解压和压缩"></a>二、解压和压缩</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xzvf 文件名 //解压文件</span><br><span class="line">$ tar zcvf FileName.tar.tgz FileName //压缩文件</span><br></pre></td></tr></table></figure>
+<h2 id="三常用错误提示"><a href="#三常用错误提示" class="headerlink" title="三常用错误提示"></a>三常用错误提示</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Permission denied //这是没有权限</span><br></pre></td></tr></table></figure>
+<h2 id="Linux主机之间互相传文件"><a href="#Linux主机之间互相传文件" class="headerlink" title="Linux主机之间互相传文件"></a>Linux主机之间互相传文件</h2><p>···<br>$ scp ~/.ssh/id_rsa.pub root@s102:~/.ssh/authorized_keys<br>$ rsync //用的人很多。远程同步工具，用于备份和镜像，支持链接备份，算法好，避免复制同样的元素。<br>···</p>
+<h2 id="rsync-的使用"><a href="#rsync-的使用" class="headerlink" title="rsync 的使用"></a>rsync 的使用</h2><ol>
+<li>Rsync 简介<br>rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快，并且支持链接复制等，是一款很强大的工具，很多人都会用。</li>
+<li>安装配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//这是在源主机上的配置</span><br><span class="line">$ yum -y install rsync //安装</span><br><span class="line">$ vi /etc/rsync_exclude.lst //配置要排除复制的文件和目录</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//在目标主机上配置</span><br></pre></td></tr></table></figure>
+<p>$ yum -y install rsync //一样先安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[rsync命令](http://man.linuxde.net/rsync)</span><br><span class="line">[CentOS 7.2 部署Rsync务](http://blog.csdn.net/wh211212/article/details/53054470)</span><br><span class="line"></span><br><span class="line">[shell脚本中执行时提示“没有那个文件或目录”的解决办法](http://www.jb51.net/article/48784.htm)</span><br><span class="line">## 网卡启动失败的</span><br><span class="line">[centos7 无法启动网络(service network restart)错误解决办法 (eno)](http://blog.csdn.net/qiaoliang328/article/details/54667421)</span><br><span class="line">centos7网卡配置文件当中有一个UUID，他的值就是网卡的MAC地址。</span><br></pre></td></tr></table></figure></p>
+<p>   nmcli con show //查看UUID的值<br> ```<br> <a href="http://blog.csdn.net/debimeng/article/details/72869541" target="_blank" rel="noopener">查看Linux网卡UUID和MAC地址—Linux命令</a></p>
 <h2 id="尾巴"><a href="#尾巴" class="headerlink" title=".尾巴"></a>.尾巴</h2><p>1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。<br>2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。</p>
 <p><a href="http://blog.csdn.net/maiduiyizu/" target="_blank" rel="noopener">欢迎访问我的csdn博客</a></p>
 
@@ -517,6 +528,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/50c37adb/" rel="prev" title="CentOs7安装hadoop3(三)">
+                CentOs7安装hadoop3(三) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -628,7 +643,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -711,7 +726,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、vi编辑器"><span class="nav-number">1.</span> <span class="nav-text">一、vi编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尾巴"><span class="nav-number">2.</span> <span class="nav-text">.尾巴</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、vi编辑器"><span class="nav-number">1.</span> <span class="nav-text">一、vi编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、解压和压缩"><span class="nav-number">2.</span> <span class="nav-text">二、解压和压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三常用错误提示"><span class="nav-number">3.</span> <span class="nav-text">三常用错误提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux主机之间互相传文件"><span class="nav-number">4.</span> <span class="nav-text">Linux主机之间互相传文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsync-的使用"><span class="nav-number">5.</span> <span class="nav-text">rsync 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尾巴"><span class="nav-number">6.</span> <span class="nav-text">.尾巴</span></a></li></ol></div>
             
 
           </div>
