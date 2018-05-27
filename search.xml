@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hive和hbase集成使用出现兼容问题重新编译源码]]></title>
+    <url>%2Fposts%2Fcc197ab4%2F</url>
+    <content type="text"><![CDATA[一、版本和兼容问题 hive1.2.1 hbase1.3.1 兼容问题报错（最后查看社区发现版本问题）hive-hbase-handler-1.2.1.jar二、编译源码 去官网下载hive1.2.1的源码。 解压到桌面。 创建一个java项目。1.把hive1.2.1lib和hbase1.3.1下面到jar包导入到项目的libs目录下（把里面重复的jar包去掉），并buildpath一下。 项目右键导入如图所示的，选择你下载源码包里面的hbase-handler下面的src下面的java,然后点击确定。 当发现没有错误的时候，导出项目为jar文件。 只选择src 并且jar包的名称为hive-hbase-handler-1.2.1.jar（文件名一定不要写错）。 最后把这个jar包上传到集群里面的hive1.2.1/lib下重新测试，成功，就解决了jar包兼容性问题。 三 、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+      <categories>
+        <category>每日bug</category>
+      </categories>
+      <tags>
+        <tag>hive hbase</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hbase主节点HMaster启动失败]]></title>
     <url>%2Fposts%2Fb2f7f194%2F</url>
     <content type="text"><![CDATA[一、hbase shell错误 运行hbase shell的list时报错： 1234567891011121314151617hbase(main):001:0&gt; listERROR: Can&apos;t get master address from ZooKeeper; znode data == nullHere is some help for this command:List all tables in hbase. Optional regular expression parameter couldbe used to filter the output. Examples: hbase&gt; list hbase&gt; list &apos;abc.*&apos; hbase&gt; list &apos;ns:abc.*&apos; hbase&gt; list &apos;ns:.*&apos; 注意：看错误提示运行hbase(zookeeper)的用户无法写入zookeeper文件，导致znode data为空。 解决：在hbase-site.xml指定一个运行hbase的用户有写入文件权限的目录作为zookeeper数据目录，如1234&lt;property&gt; &lt;name&gt;hbase.zookeeper.property.dataDir&lt;/name&gt; &lt;value&gt;/opt/module/zookeeper-3.4.10/zkData&lt;/value&gt; &lt;!--这个目录是你自己设置的目录--&gt; &lt;/property&gt; 二、HMaster启动之后自动停止 一直启动失败，后来经过查看log 解决：1234567891011121314将hbase-site.xml中的配置项中的端口号8020改为hdfs在运行的端口号9000&lt;property&gt; &lt;name&gt;hbase.rootdir&lt;/name&gt; &lt;value&gt;hdfs://localhost:8020/hbase&lt;/value&gt;&lt;/property&gt; 在core-site.xml中查到hdfs在运行的端口号为9000&lt;property&gt; &lt;name&gt;fs.defaultFS&lt;/name&gt; &lt;value&gt;hdfs://master:9000&lt;/value&gt;&lt;/property&gt; 然后重启就解决了 三、maven错误 出现了很多莫名其妙的错误，什么包没有导入啊 ，缺少依赖包啊，其实都已经导入了，可是就是不好使，困扰了好几天，后来我猜有可能是我本地仓库在机械硬盘上的问题，后来把本地仓库换到了系统上的固态盘上；一切问题解决； 四 、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
