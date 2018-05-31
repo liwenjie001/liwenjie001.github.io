@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[storm安装笔记]]></title>
+    <url>%2Fposts%2F67719d7b%2F</url>
+    <content type="text"><![CDATA[一、准备条件 安装jdk 安装zookeeper 下载 storm官网 二、storm安装 上传、解压并创建一个符号链接 12$ tar -xzvf apache-storm-1.0.4.tar.gz -C /opt/module/ $ ln -s apache-storm-1.0.4 storm 配置环境变量 12345$ vi /etc/profile#STORMexport STORM_HOME=/opt/module/apache-storm-1.0.4export PATH=$PATH:$STORM_HOME/bin$ source /etc/profile 查看版本号看是否安装成功 1bin/storm version 文件的分发 123$ xsync apache-storm-1.1.0/ $ xsync /etc/prrofile $ source /etc/profile #分发玩配置文件，一定要其他集群上重复做一下 修改配置文件 12345678910111213141516171819$ cd /opt/module/apache-storm-1.1.0/conf$ vi vi storm.yamlstorm.local.dir: &quot;/opt/module/apache-storm-1.0.4/storm&quot;storm.zookeeper.servers: - &quot;s101&quot; - &quot;s102&quot; - &quot;s103&quot;storm.zookeeper.port: 2181### nimbus.* configs are for the masternimbus.seeds: [&quot;s101&quot;]### ui.* configs are for the masterui.host: 0.0.0.0ui.port: 8080supervisor.slots.ports: - 6700 - 6701 - 6702 - 6703 切记，这 - “s101” 前是四个空格，一定不要用制表格。然后双引号里面是zookeeper集群的主机名（也可以配置一个，但是最好配置成集群所有的节点） 这些都是配置文件里面，找到这些配置，更改成你的集群信息 这里面千万注意不能用制表符 保存退出在分发文件 启动进程（先启动zkeeper） 在搭建nimbus的机器上面启动nimbus进程 1$ storm nimbus &amp; 启动各个节点的supervisor 1$ storm supervisor &amp; #去每个节点运行一下 启动ui进程 1$ storm ui &amp; 启动日志进程 1$ storm logviewer &amp; 用webUI查看 http://s101:8080 主要检查你自己启动的进程在各个节点上是否成功。 三、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+      <categories>
+        <category>storm</category>
+      </categories>
+      <tags>
+        <tag>storm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[hive和hbase集成使用出现兼容问题重新编译源码]]></title>
     <url>%2Fposts%2Fcc197ab4%2F</url>
     <content type="text"><![CDATA[一、版本和兼容问题 hive1.2.1 hbase1.3.1 兼容问题报错（最后查看社区发现版本问题）hive-hbase-handler-1.2.1.jar二、编译源码 去官网下载hive1.2.1的源码。 解压到桌面。 创建一个java项目。1.把hive1.2.1lib和hbase1.3.1下面到jar包导入到项目的libs目录下（把里面重复的jar包去掉），并buildpath一下。 项目右键导入如图所示的，选择你下载源码包里面的hbase-handler下面的src下面的java,然后点击确定。 当发现没有错误的时候，导出项目为jar文件。 只选择src 并且jar包的名称为hive-hbase-handler-1.2.1.jar（文件名一定不要写错）。 最后把这个jar包上传到集群里面的hive1.2.1/lib下重新测试，成功，就解决了jar包兼容性问题。 三 、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
@@ -43,7 +54,7 @@
   <entry>
     <title><![CDATA[IDEA常用快捷键]]></title>
     <url>%2Fposts%2F566321e7%2F</url>
-    <content type="text"><![CDATA[注意：## 一、常用快捷键1. 在IntelJ中和Eclipse中稍有不同，在Eclipse中，输入main再按Alt+/即可自动补全main函数，但是在IntellJ中则是输入psvm，选中即可.2. 在方法体内部有for循环，在IntellJ中是输入fori，然后会有一个提示，选中需要的for循环即可3. System.out.println();在IntellJ中是输入sout4. 在idea中添加try/catch的快捷键 ctrl+alt+t 选中想被try/catch包围的语句，同时按下ctrl+alt+t## .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+    <content type="text"><![CDATA[注意：## 一、常用快捷键1. 在IntelJ中和Eclipse中稍有不同，在Eclipse中，输入main再按Alt+/即可自动补全main函数，但是在IntellJ中则是输入psvm，选中即可.2. 在方法体内部有for循环，在IntellJ中是输入fori，然后会有一个提示，选中需要的for循环即可3. System.out.println();在IntellJ中是输入sout4. 在idea中添加try/catch的快捷键 ctrl+alt+t 选中想被try/catch包围的语句，同时按下ctrl+alt+t## 二、内存配置1. 首先打开idea的安装目录下的bin目录下，找到下图中的文件1. 用sublime（或者其他文本编辑器编辑它）1234567891011# 修改前两行，一个最小内存，一个做大内存，根据你电脑内存大小来设置，我电脑16G内存，所以我设置的大点-Xms256m-Xmx2048m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow## .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
   </entry>
   <entry>
     <title><![CDATA[String、StringBuffer和StringBuilder详解]]></title>
@@ -63,7 +74,7 @@
   <entry>
     <title><![CDATA[linux常用命令]]></title>
     <url>%2Fposts%2Ffe4ef317%2F</url>
-    <content type="text"><![CDATA[一、vi编辑器 查看行号1$ :set number 二、解压和压缩12$ tar -xzvf 文件名 //解压文件$ tar zcvf FileName.tar.tgz FileName //压缩文件 三常用错误提示1Permission denied //这是没有权限 Linux主机之间互相传文件···$ scp ~/.ssh/id_rsa.pub root@s102:~/.ssh/authorized_keys$ rsync //用的人很多。远程同步工具，用于备份和镜像，支持链接备份，算法好，避免复制同样的元素。··· rsync 的使用 Rsync 简介rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快，并且支持链接复制等，是一款很强大的工具，很多人都会用。 安装配置123//这是在源主机上的配置$ yum -y install rsync //安装$ vi /etc/rsync_exclude.lst //配置要排除复制的文件和目录 1//在目标主机上配置 $ yum -y install rsync //一样先安装12345678910111213141516171819202122232425262728293031323334353637383940## 修改权限修改文件可读写属性的方法例如：把index.html 文件修改为可写可读可执行: 代码如下1 chmod 777 index.html要修改目录下所有文件属性可写可读可执行: 代码如下1 chmod 777 *.*把文件夹名称与后缀名用*来代替就可以了。比如：修改所有htm文件的属性: 代码如下1 chmod 777 *.htm修改文件夹属性的方法把目录 /images/xiao 修改为可写可读可执行 代码如下1 chmod 777 /images/xiao修改目录下所有的文件夹属性 代码如下1 chmod 777 *把文件夹名称用*来代替就可以了要修改文件夹内所有的文件和文件夹及子文件夹属性为可写可读可执行 代码如下1 chmod -R 777 /upload[rsync命令](http://man.linuxde.net/rsync)[CentOS 7.2 部署Rsync务](http://blog.csdn.net/wh211212/article/details/53054470)[shell脚本中执行时提示“没有那个文件或目录”的解决办法](http://www.jb51.net/article/48784.htm)## 网卡启动失败的[centos7 无法启动网络(service network restart)错误解决办法 (eno)](http://blog.csdn.net/qiaoliang328/article/details/54667421)centos7网卡配置文件当中有一个UUID，他的值就是网卡的MAC地址。 nmcli con show //查看UUID的值 ``` 查看Linux网卡UUID和MAC地址—Linux命令 乌班图安装软件：apt-get install unzip //这是安装一个解压软件 .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+    <content type="text"><![CDATA[一、vi编辑器 查看行号1$ :set number 二、解压和压缩12$ tar -xzvf 文件名 //解压文件$ tar zcvf FileName.tar.tgz FileName //压缩文件 三常用错误提示1Permission denied //这是没有权限 Linux主机之间互相传文件···$ scp ~/.ssh/id_rsa.pub root@s102:~/.ssh/authorized_keys$ rsync //用的人很多。远程同步工具，用于备份和镜像，支持链接备份，算法好，避免复制同样的元素。··· rsync 的使用 Rsync 简介rsync命令是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快，并且支持链接复制等，是一款很强大的工具，很多人都会用。 安装配置123//这是在源主机上的配置$ yum -y install rsync //安装$ vi /etc/rsync_exclude.lst //配置要排除复制的文件和目录 1//在目标主机上配置 $ yum -y install rsync //一样先安装12345678910111213141516171819202122232425262728293031323334353637383940## 修改权限修改文件可读写属性的方法例如：把index.html 文件修改为可写可读可执行: 代码如下1 chmod 777 index.html要修改目录下所有文件属性可写可读可执行: 代码如下1 chmod 777 *.*把文件夹名称与后缀名用*来代替就可以了。比如：修改所有htm文件的属性: 代码如下1 chmod 777 *.htm修改文件夹属性的方法把目录 /images/xiao 修改为可写可读可执行 代码如下1 chmod 777 /images/xiao修改目录下所有的文件夹属性 代码如下1 chmod 777 *把文件夹名称用*来代替就可以了要修改文件夹内所有的文件和文件夹及子文件夹属性为可写可读可执行 代码如下1 chmod -R 777 /upload[rsync命令](http://man.linuxde.net/rsync)[CentOS 7.2 部署Rsync务](http://blog.csdn.net/wh211212/article/details/53054470)[shell脚本中执行时提示“没有那个文件或目录”的解决办法](http://www.jb51.net/article/48784.htm)## 网卡启动失败的[centos7 无法启动网络(service network restart)错误解决办法 (eno)](http://blog.csdn.net/qiaoliang328/article/details/54667421)centos7网卡配置文件当中有一个UUID，他的值就是网卡的MAC地址。 nmcli con show //查看UUID的值 123 [查看Linux网卡UUID和MAC地址---Linux命令](http://blog.csdn.net/debimeng/article/details/72869541)1. 后台运行 ctrl+z #这是后台运行$ bg #查看后台运行程序``` 乌班图安装软件：apt-get install unzip //这是安装一个解压软件 .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
   </entry>
   <entry>
     <title><![CDATA[CentOs7安装hadoop3（二）]]></title>

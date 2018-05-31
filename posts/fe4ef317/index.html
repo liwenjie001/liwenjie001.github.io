@@ -119,7 +119,7 @@
 <meta property="og:site_name" content="liwenjie001的博客">
 <meta property="og:description" content="个人遇到的linux常用命令总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-10T12:06:55.107Z">
+<meta property="og:updated_time" content="2018-05-29T14:33:44.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux常用命令">
 <meta name="twitter:description" content="个人遇到的linux常用命令总结">
@@ -468,7 +468,8 @@
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//在目标主机上配置</span><br></pre></td></tr></table></figure>
 <p>$ yum -y install rsync //一样先安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 修改权限</span><br><span class="line"></span><br><span class="line">修改文件可读写属性的方法</span><br><span class="line">例如：把index.html 文件修改为可写可读可执行:</span><br><span class="line"> 代码如下</span><br><span class="line">1	chmod 777 index.html</span><br><span class="line"></span><br><span class="line">要修改目录下所有文件属性可写可读可执行:</span><br><span class="line"> 代码如下</span><br><span class="line">1	chmod 777 *.*</span><br><span class="line"></span><br><span class="line">把文件夹名称与后缀名用*来代替就可以了。</span><br><span class="line">比如：修改所有htm文件的属性:</span><br><span class="line"> 代码如下</span><br><span class="line">1	chmod 777 *.htm</span><br><span class="line"></span><br><span class="line">修改文件夹属性的方法</span><br><span class="line">把目录 /images/xiao 修改为可写可读可执行</span><br><span class="line"> 代码如下</span><br><span class="line">1	chmod 777 /images/xiao</span><br><span class="line"></span><br><span class="line">修改目录下所有的文件夹属性</span><br><span class="line"> 代码如下</span><br><span class="line">1	chmod 777 *</span><br><span class="line"></span><br><span class="line">把文件夹名称用*来代替就可以了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">要修改文件夹内所有的文件和文件夹及子文件夹属性为可写可读可执行</span><br><span class="line"> 代码如下</span><br><span class="line">1	chmod -R 777 /upload</span><br><span class="line">[rsync命令](http://man.linuxde.net/rsync)</span><br><span class="line">[CentOS 7.2 部署Rsync务](http://blog.csdn.net/wh211212/article/details/53054470)</span><br><span class="line"></span><br><span class="line">[shell脚本中执行时提示“没有那个文件或目录”的解决办法](http://www.jb51.net/article/48784.htm)</span><br><span class="line">## 网卡启动失败的</span><br><span class="line">[centos7 无法启动网络(service network restart)错误解决办法 (eno)](http://blog.csdn.net/qiaoliang328/article/details/54667421)</span><br><span class="line">centos7网卡配置文件当中有一个UUID，他的值就是网卡的MAC地址。</span><br></pre></td></tr></table></figure></p>
-<p>   nmcli con show //查看UUID的值<br> ```<br> <a href="http://blog.csdn.net/debimeng/article/details/72869541" target="_blank" rel="noopener">查看Linux网卡UUID和MAC地址—Linux命令</a></p>
+<p>   nmcli con show //查看UUID的值<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> [查看Linux网卡UUID和MAC地址---Linux命令](http://blog.csdn.net/debimeng/article/details/72869541)</span><br><span class="line"></span><br><span class="line">1. 后台运行</span><br></pre></td></tr></table></figure></p>
+<p>ctrl+z #这是后台运行<br>$ bg #查看后台运行程序<br>```</p>
 <p>乌班图安装软件：<br>apt-get install unzip //这是安装一个解压软件</p>
 <h2 id="尾巴"><a href="#尾巴" class="headerlink" title=".尾巴"></a>.尾巴</h2><p>1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。<br>2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。</p>
 <p><a href="http://blog.csdn.net/maiduiyizu/" target="_blank" rel="noopener">欢迎访问我的csdn博客</a></p>
@@ -644,7 +645,7 @@ var jiathis_config={
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -666,7 +667,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
