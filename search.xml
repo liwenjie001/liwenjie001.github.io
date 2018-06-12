@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[python3.6安装mysqllab]]></title>
+    <url>%2Fposts%2F2491b173%2F</url>
+    <content type="text"><![CDATA[注意： 一、安装 经过查资料python3.x不再支持mysqldb。其替代模块是PyMySQL 用管理员打开cmd 1pip3 install PyMySQL 链接数据库创建一个数据库 1234mysql -uroot -prootcreate database python;use python; 创建一个表 1234567CREATE TABLE `users` ( `id` int(11) NOT NULL AUTO_INCREMENT, `email` varchar(255) COLLATE utf8_bin NOT NULL, `password` varchar(255) COLLATE utf8_bin NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_binAUTO_INCREMENT=1 ; 写一个python文件 12345678910111213141516171819202122232425262728import pymysqlimport pymysql.cursors# 链接数据库connection = pymysql.connect(host=&apos;localhost&apos;, user=&apos;root&apos;, password=&apos;root&apos;, db=&apos;python&apos;, charset=&apos;utf8&apos;, cursorclass=pymysql.cursors.DictCursor)try: with connection.cursor() as cursor: # 添加一条新的记录 sql = &quot;INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)&quot; cursor.execute(sql, (&apos;webmaster@python.org&apos;, &apos;very-secret&apos;)) # 提交结果 connection.commit() with connection.cursor() as cursor: # 读取结果 sql = &quot;SELECT `id`, `password` FROM `users` WHERE `email`=%s&quot; cursor.execute(sql, (&apos;webmaster@python.org&apos;,)) result = cursor.fetchone() print(result)finally: connection.close() 看到以上结果就代表安装成功了； 二 、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+      <categories>
+        <category>python mysql</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[storm安装笔记]]></title>
     <url>%2Fposts%2F67719d7b%2F</url>
     <content type="text"><![CDATA[一、准备条件 安装jdk 安装zookeeper 下载 storm官网 二、storm安装 上传、解压并创建一个符号链接 12$ tar -xzvf apache-storm-1.0.4.tar.gz -C /opt/module/ $ ln -s apache-storm-1.0.4 storm 配置环境变量 12345$ vi /etc/profile#STORMexport STORM_HOME=/opt/module/apache-storm-1.0.4export PATH=$PATH:$STORM_HOME/bin$ source /etc/profile 查看版本号看是否安装成功 1bin/storm version 文件的分发 123$ xsync apache-storm-1.1.0/ $ xsync /etc/prrofile $ source /etc/profile #分发玩配置文件，一定要其他集群上重复做一下 修改配置文件 12345678910111213141516171819$ cd /opt/module/apache-storm-1.1.0/conf$ vi vi storm.yamlstorm.local.dir: &quot;/opt/module/apache-storm-1.0.4/storm&quot;storm.zookeeper.servers: - &quot;s101&quot; - &quot;s102&quot; - &quot;s103&quot;storm.zookeeper.port: 2181### nimbus.* configs are for the masternimbus.seeds: [&quot;s101&quot;]### ui.* configs are for the masterui.host: 0.0.0.0ui.port: 8080supervisor.slots.ports: - 6700 - 6701 - 6702 - 6703 切记，这 - “s101” 前是四个空格，一定不要用制表格。然后双引号里面是zookeeper集群的主机名（也可以配置一个，但是最好配置成集群所有的节点） 这些都是配置文件里面，找到这些配置，更改成你的集群信息 这里面千万注意不能用制表符 保存退出在分发文件 启动进程（先启动zkeeper） 在搭建nimbus的机器上面启动nimbus进程 1$ storm nimbus &amp; 启动各个节点的supervisor 1$ storm supervisor &amp; #去每个节点运行一下 启动ui进程 1$ storm ui &amp; 启动日志进程 1$ storm logviewer &amp; 用webUI查看 http://s101:8080 主要检查你自己启动的进程在各个节点上是否成功。 三、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
