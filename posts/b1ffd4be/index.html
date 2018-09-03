@@ -112,25 +112,17 @@
 
 
 
-<meta name="description" content="SSH详解和伪分布式的搭建">
+<meta name="description" content="select 多参数提取出来的方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOs7安装hadoop3（二）">
-<meta property="og:url" content="https://liwenjie001.github.io/posts/b24ffb1/index.html">
+<meta property="og:title" content="spark的select多列参数提出来的方法">
+<meta property="og:url" content="https://liwenjie001.github.io/posts/b1ffd4be/index.html">
 <meta property="og:site_name" content="liwenjie001的博客">
-<meta property="og:description" content="SSH详解和伪分布式的搭建">
+<meta property="og:description" content="select 多参数提取出来的方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803181017_27.png">
-<meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803181021_511.png">
-<meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803181614_414.png">
-<meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803181622_20.png">
-<meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803182153_947.png">
-<meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803182203_737.png">
-<meta property="og:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803182215_564.png">
-<meta property="og:updated_time" content="2018-03-21T13:24:34.856Z">
+<meta property="og:updated_time" content="2018-08-28T14:34:57.874Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOs7安装hadoop3（二）">
-<meta name="twitter:description" content="SSH详解和伪分布式的搭建">
-<meta name="twitter:image" content="http://p5n3jfo7k.bkt.clouddn.com/201803181017_27.png">
+<meta name="twitter:title" content="spark的select多列参数提出来的方法">
+<meta name="twitter:description" content="select 多参数提取出来的方法">
 
 
 
@@ -160,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="https://liwenjie001.github.io/posts/b24ffb1/"/>
+  <link rel="canonical" href="https://liwenjie001.github.io/posts/b1ffd4be/"/>
 
 
 
 
 
-  <title>CentOs7安装hadoop3（二） | liwenjie001的博客</title>
+  <title>spark的select多列参数提出来的方法 | liwenjie001的博客</title>
   
 
 
@@ -347,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liwenjie001.github.io/posts/b24ffb1/">
+    <link itemprop="mainEntityOfPage" href="https://liwenjie001.github.io/posts/b1ffd4be/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liwenjie001">
@@ -364,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CentOs7安装hadoop3（二）</h1>
+          <h1 class="post-title" itemprop="name headline">spark的select多列参数提出来的方法</h1>
         
 
         <div class="post-meta">
@@ -376,8 +368,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-17T22:53:45+08:00">
-                2018-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T21:39:54+08:00">
+                2018-08-28
               </time>
             
 
@@ -396,8 +388,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/posts/b24ffb1/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="posts/b24ffb1/" itemprop="commentsCount"></span>
+                <a href="/posts/b1ffd4be/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="posts/b1ffd4be/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -445,7 +437,7 @@
 
           
               <div class="post-description">
-                  SSH详解和伪分布式的搭建
+                  select 多参数提取出来的方法
               </div>
           
 
@@ -462,71 +454,7 @@
       
 
       
-        <h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><ol>
-<li>配置hadoop环境变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/profile</span><br><span class="line"> export HADOOP_HOME=/usr/hadoop</span><br><span class="line"> export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin</span><br><span class="line">:wq</span><br><span class="line">$ source /etc/profile</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>然后通过Hadoop version查看结果<br><img src="http://p5n3jfo7k.bkt.clouddn.com/201803181017_27.png" alt=""></p>
-<h2 id="二、搭建伪分布式"><a href="#二、搭建伪分布式" class="headerlink" title="二、搭建伪分布式"></a>二、搭建伪分布式</h2><ol>
-<li>进入配置文件目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd /usr/hadoop/etc/hadoop/</span><br><span class="line">$ ls</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><img src="http://p5n3jfo7k.bkt.clouddn.com/201803181021_511.png" alt=""></p>
-<ol>
-<li><p>配置core-site.xml 文件 vi core-site.xml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在&lt;configuration&gt; 标签里面加上以下代码</span><br><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;hdfs://localhost/&lt;/value&gt; //默认端口为：8020；</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置hdfs-site.xml 文件 vi hdfs-site.xml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在&lt;configuration&gt; 标签里面加上以下代码</span><br><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;dfs.replication&lt;/name&gt; //副本数</span><br><span class="line">     &lt;value&gt;1&lt;/value&gt; //伪分布式一额节点</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置 mapred-site.xml 文件  vi mapred-site.xml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在&lt;configuration&gt; 标签里面加上以下代码</span><br><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置 yarn-site.xml 文件 vi yarn-site.xml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;localhost&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">     &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">     &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>初始化化hdfs ：hadoop namenode -format（这就像从新安装系统一样）</p>
-</li>
-</ol>
-<p>7.启动 start-all.sh<br><img src="http://p5n3jfo7k.bkt.clouddn.com/201803181614_414.png" alt=""></p>
-<p><font color="#ff0000" size="4" face="黑体">注意：这是甚吗？？？？</font><br>这是由于缺少用户定义所以我们要分别对启动和关闭脚本进行配置</p>
-<ol>
-<li><p>配置 start-dfs.sh 和 stop-dfs.sh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//把以下代码复制到文件的空白处 ：wq 保存退出</span><br><span class="line">HDFS_DATANODE_USER=root</span><br><span class="line">HDFS_DATANODE_SECURE_USER=hdfs</span><br><span class="line">HDFS_NAMENODE_USER=root</span><br><span class="line">HDFS_SECONDARYNAMENODE_USER=root</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置 start-yarn.sh 和 stop-yarn.sh</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//把以下代码复制到文件的空白处 ：wq 保存退出</span><br><span class="line">YARN_RESOURCEMANAGER_USER=root</span><br><span class="line">HADOOP_SECURE_DN_USER=yarn</span><br><span class="line">YARN_NODEMANAGER_USER=root</span><br></pre></td></tr></table></figure>
-<ol>
-<li>这次在运行 start-all.sh 使用jps查看进程 <img src="http://p5n3jfo7k.bkt.clouddn.com/201803181622_20.png" alt=""><br>红框内的5个进程缺一不可，如果没有有一个没有启动，必须关闭所有所有经常，从新启动；<h2 id="三、SSH安装与使用"><a href="#三、SSH安装与使用" class="headerlink" title="三、SSH安装与使用"></a>三、SSH安装与使用</h2></li>
-<li>为甚吗要安装SSH？<br>众所周知，hadoop是集群部署的，假如你有个上千台服务器，当hadoop互相访问的时候，你一个一个互相输入登陆密码，你是不是会疯。所有SSH就能让你互相免密登陆，解决手动输入密码的问题。</li>
-<li>SSH怎么解决的免密登陆问题？<br><img src="http://p5n3jfo7k.bkt.clouddn.com/201803182153_947.png" alt=""><br>3.怎么设置呢？<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -qa | grep ssh //查询是否安装</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>如图就是安装了SSH</p>
-<p><img src="http://p5n3jfo7k.bkt.clouddn.com/201803182203_737.png" alt=""></p>
-<ol>
-<li><p>如果没有请通过下面代码安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install openssh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>生成密钥</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>进入ssh密钥目录，把公钥复制一份发往目标主机</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/.ssh</span><br><span class="line">$ ls</span><br><span class="line">$ cp id_rsa.pub ~./ssh/authorized_keys //以自身主机为例</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>登陆一下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh localhost</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>如图结果,代表成功。<br><img src="http://p5n3jfo7k.bkt.clouddn.com/201803182215_564.png" alt=""></p>
-<h2 id="四、尾巴"><a href="#四、尾巴" class="headerlink" title="四、尾巴"></a>四、尾巴</h2><ol>
-<li>如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。</li>
-<li>这次搭建遇到了很多问题，如果想最快的解决问题，还是要看它报甚吗错，一个一个错误的排查，这样更能让你快速的解决问题，也能让自己更加进步。如果是在看不懂问题的所在出，请baidu一下，会有网友遇到你也曾经遇到的坑的；</li>
-<li>也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。</li>
-</ol>
-<p><a href="http://blog.csdn.net/maiduiyizu/" target="_blank" rel="noopener">欢迎访问我的csdn博客</a></p>
+        <font color="#ff0000" size="4" face="黑体">注意：</font><br>## 一、需求<br>1. 在实际开放当中会遇到sparkSQL 对多列进行修改最后union操作而要对字段进行格式化操作，这样需要多个DF进行select 操作 所以需要写多个字段，这样字段一多就会出现重复特别占地方。<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>## .尾巴<br>1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。<br>2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。<br><br> <a href="http://blog.csdn.net/maiduiyizu/" target="_blank" rel="noopener">欢迎访问我的csdn博客</a> 
 
       
     </div>
@@ -575,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/e41077e7/" rel="next" title="CentOs7安装hadoop3.0(一)">
-                <i class="fa fa-chevron-left"></i> CentOs7安装hadoop3.0(一)
+              <a href="/posts/25721364/" rel="next" title="windows上安装Thrift">
+                <i class="fa fa-chevron-left"></i> windows上安装Thrift
               </a>
             
           </div>
@@ -584,10 +512,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/fe4ef317/" rel="prev" title="linux常用命令">
-                linux常用命令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -670,17 +594,8 @@ var jiathis_config={
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -772,22 +687,6 @@ var jiathis_config={
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、准备工作"><span class="nav-number">1.</span> <span class="nav-text">一、准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、搭建伪分布式"><span class="nav-number">2.</span> <span class="nav-text">二、搭建伪分布式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、SSH安装与使用"><span class="nav-number">3.</span> <span class="nav-text">三、SSH安装与使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、尾巴"><span class="nav-number">4.</span> <span class="nav-text">四、尾巴</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

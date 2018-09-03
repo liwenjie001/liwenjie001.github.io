@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[spark的select多列参数提出来的方法]]></title>
+    <url>%2Fposts%2Fb1ffd4be%2F</url>
+    <content type="text"><![CDATA[注意：## 一、需求1. 在实际开放当中会遇到sparkSQL 对多列进行修改最后union操作而要对字段进行格式化操作，这样需要多个DF进行select 操作 所以需要写多个字段，这样字段一多就会出现重复特别占地方。## .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[windows上安装Thrift]]></title>
+    <url>%2Fposts%2F25721364%2F</url>
+    <content type="text"><![CDATA[一、安装 下载thrift ,windows.exe) tar开 进入thrift-0.11.0/lib/py目录下 执行安装命令 1cmd&gt;setup.py install 重启IDEA如果可以导入的话就说明安装成功了 1import thrift._ 二、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+      <categories>
+        <category>python Thrift</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[python3.6安装mysqllab]]></title>
     <url>%2Fposts%2F2491b173%2F</url>
-    <content type="text"><![CDATA[注意： 一、安装 经过查资料python3.x不再支持mysqldb。其替代模块是PyMySQL 用管理员打开cmd 1pip3 install PyMySQL 链接数据库创建一个数据库 1234mysql -uroot -prootcreate database python;use python; 创建一个表 1234567CREATE TABLE `users` ( `id` int(11) NOT NULL AUTO_INCREMENT, `email` varchar(255) COLLATE utf8_bin NOT NULL, `password` varchar(255) COLLATE utf8_bin NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_binAUTO_INCREMENT=1 ; 写一个python文件 12345678910111213141516171819202122232425262728import pymysqlimport pymysql.cursors# 链接数据库connection = pymysql.connect(host=&apos;localhost&apos;, user=&apos;root&apos;, password=&apos;root&apos;, db=&apos;python&apos;, charset=&apos;utf8&apos;, cursorclass=pymysql.cursors.DictCursor)try: with connection.cursor() as cursor: # 添加一条新的记录 sql = &quot;INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)&quot; cursor.execute(sql, (&apos;webmaster@python.org&apos;, &apos;very-secret&apos;)) # 提交结果 connection.commit() with connection.cursor() as cursor: # 读取结果 sql = &quot;SELECT `id`, `password` FROM `users` WHERE `email`=%s&quot; cursor.execute(sql, (&apos;webmaster@python.org&apos;,)) result = cursor.fetchone() print(result)finally: connection.close() 看到以上结果就代表安装成功了； 二 、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+    <content type="text"><![CDATA[一、安装 经过查资料python3.x不再支持mysqldb。其替代模块是PyMySQL 用管理员打开cmd 1pip3 install PyMySQL 链接数据库创建一个数据库 1234mysql -uroot -prootcreate database python;use python; 创建一个表 1234567CREATE TABLE `users` ( `id` int(11) NOT NULL AUTO_INCREMENT, `email` varchar(255) COLLATE utf8_bin NOT NULL, `password` varchar(255) COLLATE utf8_bin NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_binAUTO_INCREMENT=1 ; 写一个python文件 12345678910111213141516171819202122232425262728import pymysqlimport pymysql.cursors# 链接数据库connection = pymysql.connect(host=&apos;localhost&apos;, user=&apos;root&apos;, password=&apos;root&apos;, db=&apos;python&apos;, charset=&apos;utf8&apos;, cursorclass=pymysql.cursors.DictCursor)try: with connection.cursor() as cursor: # 添加一条新的记录 sql = &quot;INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)&quot; cursor.execute(sql, (&apos;webmaster@python.org&apos;, &apos;very-secret&apos;)) # 提交结果 connection.commit() with connection.cursor() as cursor: # 读取结果 sql = &quot;SELECT `id`, `password` FROM `users` WHERE `email`=%s&quot; cursor.execute(sql, (&apos;webmaster@python.org&apos;,)) result = cursor.fetchone() print(result)finally: connection.close() 看到以上结果就代表安装成功了； 二 、尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
       <categories>
         <category>python mysql</category>
       </categories>
@@ -65,7 +81,7 @@
   <entry>
     <title><![CDATA[IDEA常用快捷键]]></title>
     <url>%2Fposts%2F566321e7%2F</url>
-    <content type="text"><![CDATA[注意：## 一、常用快捷键1. 在IntelJ中和Eclipse中稍有不同，在Eclipse中，输入main再按Alt+/即可自动补全main函数，但是在IntellJ中则是输入psvm，选中即可.2. 在方法体内部有for循环，在IntellJ中是输入fori，然后会有一个提示，选中需要的for循环即可3. System.out.println();在IntellJ中是输入sout4. 在idea中添加try/catch的快捷键 ctrl+alt+t 选中想被try/catch包围的语句，同时按下ctrl+alt+t## 二、内存配置1. 首先打开idea的安装目录下的bin目录下，找到下图中的文件1. 用sublime（或者其他文本编辑器编辑它）1234567891011# 修改前两行，一个最小内存，一个做大内存，根据你电脑内存大小来设置，我电脑16G内存，所以我设置的大点-Xms256m-Xmx2048m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow## .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+    <content type="text"><![CDATA[注意：## 一、常用快捷键1. 在IntelJ中和Eclipse中稍有不同，在Eclipse中，输入main再按Alt+/即可自动补全main函数，但是在IntellJ中则是输入psvm，选中即可.2. 在方法体内部有for循环，在IntellJ中是输入fori，然后会有一个提示，选中需要的for循环即可3. System.out.println();在IntellJ中是输入sout4. 在idea中添加try/catch的快捷键 ctrl+alt+t 选中想被try/catch包围的语句，同时按下ctrl+alt+t## 二、内存配置1. 首先打开idea的安装目录下的bin目录下，找到下图中的文件1. 用sublime（或者其他文本编辑器编辑它）1234567891011# 修改前两行，一个最小内存，一个做大内存，根据你电脑内存大小来设置，我电脑16G内存，所以我设置的大点-Xms256m-Xmx2048m-XX:ReservedCodeCacheSize=240m-XX:+UseConcMarkSweepGC-XX:SoftRefLRUPolicyMSPerMB=50-ea-Dsun.io.useCanonCaches=false-Djava.net.preferIPv4Stack=true-XX:+HeapDumpOnOutOfMemoryError-XX:-OmitStackTraceInFastThrow## 三、模板设置1. 打开设置找到以下在右面找到你想要设置的模板类型，然后点击加号自己添加## .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
   </entry>
   <entry>
     <title><![CDATA[String、StringBuffer和StringBuilder详解]]></title>
