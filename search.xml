@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[centOs6.5网络问题]]></title>
+    <url>%2Fposts%2Fbfc566cb%2F</url>
+    <content type="text"><![CDATA[一、centOS6.5 网络问题。 经常出现centos6.5出现网络连接失败 eth0 connection failed: Device not managed by NetworkManager 这个原因，修改网卡MAC地址也不对，最后google一下得到解决办法。修改网络配置文件 /etc/sysconfig/network-scripts/ifcfg-eno* 1$ NM_CONTROLLED=yes =====&gt; NM_CONTROLLED=no 然后保存退出，重启电脑reboot 。等网络修复了在改回来即可。1$ NM_CONTROLLED=no =====&gt; NM_CONTROLLED=yes 二.尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
+      <categories>
+        <category>linux  centos6.5</category>
+      </categories>
+      <tags>
+        <tag>linux centos6.5</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[spark的select多列参数提出来的方法]]></title>
     <url>%2Fposts%2Fb1ffd4be%2F</url>
     <content type="text"><![CDATA[注意：## 一、需求1. 在实际开放当中会遇到sparkSQL 对多列进行修改最后union操作而要对字段进行格式化操作，这样需要多个DF进行select 操作 所以需要写多个字段，这样字段一多就会出现重复特别占地方。## .尾巴1.如有错误欢迎大家指出，我会及时更正，有什么不懂也可以留言提问，互相交流吗。2.也许大家觉得这没什么，但是我会认真对待，把它当成我的笔记、心得、这样才能提升自己。 欢迎访问我的csdn博客]]></content>
